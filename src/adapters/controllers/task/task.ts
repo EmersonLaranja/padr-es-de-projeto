@@ -1,4 +1,5 @@
-import validator from "validator";
+import { Controller } from "../../interfaces/controller";
+import { DateValidator } from "../../interfaces/dateValidator";
 import { HttpRequest, HttpResponse } from "../../interfaces/http";
 import { InvalidParamError } from "../../presentations/api/errors/invalid-param-error";
 import { MissingParamError } from "../../presentations/api/errors/missing-param-error";
@@ -6,10 +7,9 @@ import {
   badRequest,
   ok,
 } from "../../presentations/api/httpResponses/httpResponses";
-import { Request, Response } from "express";
-import { Controller } from "../../interfaces/controller";
 
 export default class TaskController implements Controller {
+  constructor(private readonly dateValidator: DateValidator) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const requiredFields = ["title", "description", "date"];
 
@@ -20,9 +20,7 @@ export default class TaskController implements Controller {
     }
     const { title, description, date } = httpRequest.body;
 
-    const isValid = validator.isDate(date, {
-      format: "DD-MM-YYYY",
-    });
+    const isValid = this.dateValidator.isValid(date);
 
     if (!isValid) {
       return badRequest(new InvalidParamError("date"));
