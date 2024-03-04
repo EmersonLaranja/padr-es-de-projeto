@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { Collection, MongoClient } from "mongodb";
 
 export class MongoDbConnector {
   private static instance: MongoDbConnector;
@@ -15,5 +15,11 @@ export class MongoDbConnector {
     if (!this.client) {
       this.client = await MongoClient.connect(uri);
     }
+  }
+
+  public getCollection(name: string): Collection {
+    if (!this.client)
+      throw new Error("Database not connected. Call 'connect' method first.");
+    return this.client?.db().collection(name);
   }
 }

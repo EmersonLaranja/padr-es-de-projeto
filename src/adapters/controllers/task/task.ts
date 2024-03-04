@@ -1,3 +1,4 @@
+import { AddTask } from "../../../usecases/addTask";
 import { Controller } from "../../interfaces/controller";
 import { DateValidator } from "../../interfaces/dateValidator";
 import { HttpRequest, HttpResponse } from "../../interfaces/http";
@@ -9,7 +10,10 @@ import {
 } from "../../presentations/api/httpResponses/httpResponses";
 
 export default class TaskController implements Controller {
-  constructor(private readonly dateValidator: DateValidator) {}
+  constructor(
+    private readonly addTask: AddTask,
+    private readonly dateValidator: DateValidator
+  ) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const requiredFields = ["title", "description", "date"];
 
@@ -26,7 +30,7 @@ export default class TaskController implements Controller {
       return badRequest(new InvalidParamError("date"));
     }
 
-    const task = { title, description, date };
+    const task = await this.addTask.add({ title, description, date });
     return ok(task);
   }
 }
