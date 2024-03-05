@@ -1,15 +1,15 @@
 import { Collection, MongoClient } from "mongodb";
 
-export class MongoDbConnector {
-  private static instance: MongoDbConnector;
+export class MongoDbManager {
+  private static instance: MongoDbManager;
   private client: MongoClient | null = null;
   private constructor() {}
 
-  public static getInstance(): MongoDbConnector {
-    if (!MongoDbConnector.instance) {
-      MongoDbConnector.instance = new MongoDbConnector();
+  public static getInstance(): MongoDbManager {
+    if (!MongoDbManager.instance) {
+      MongoDbManager.instance = new MongoDbManager();
     }
-    return MongoDbConnector.instance;
+    return MongoDbManager.instance;
   }
   public async connect(uri: string): Promise<void> {
     if (!this.client) {

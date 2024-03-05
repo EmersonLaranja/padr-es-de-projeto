@@ -1,8 +1,8 @@
 import env from "./adapters/presentations/api/config/env";
 import app from "./adapters/presentations/api/config/app";
-import { MongoDbConnector } from "./dataSources/db/config/MongoDbConnector";
+import { MongoDbManager } from "./dataSources/db/config/mongoDbManager";
 
-const connector = MongoDbConnector.getInstance();
+const connector = MongoDbManager.getInstance();
 
 connector
   .connect(env.mongoUrl)
