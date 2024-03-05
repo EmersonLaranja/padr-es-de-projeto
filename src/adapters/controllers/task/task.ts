@@ -33,7 +33,8 @@ export default class TaskController implements Controller {
       }
 
       const task = await this.addTask.add({ title, description, date });
-      return ok(task);
+      // return ok(task);
+      throw new Error("Error Simulated");
     } catch (error: any) {
       return serverError(error);
     }
