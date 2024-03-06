@@ -1,4 +1,5 @@
 import { Validation } from "../interfaces/validation";
+import { RequiredFieldsValidation } from "./requiredFieldsValidation";
 
 export class ValidationComposite implements Validation {
   constructor(private readonly validations: Validation[]) {}
@@ -15,7 +16,9 @@ export class ValidationComposite implements Validation {
 const taskValidationCompositeFactory = (): ValidationComposite => {
   const validations: Validation[] = [];
 
-  //TODO: RequiredFieldsValidation
+  for (const field of ["title", "description", "date"]) {
+    validations.push(new RequiredFieldsValidation(field));
+  }
 
   //TODO: DateValidation
 
