@@ -1,4 +1,6 @@
+import DateValidatorAdapter from "../dateValidatorAdapter";
 import { Validation } from "../interfaces/validation";
+import { DateValidation } from "./dateValidation";
 import { RequiredFieldsValidation } from "./requiredFieldsValidation";
 
 export class ValidationComposite implements Validation {
@@ -21,6 +23,7 @@ const taskValidationCompositeFactory = (): ValidationComposite => {
   }
 
   //TODO: DateValidation
+  validations.push(new DateValidation("date", new DateValidatorAdapter()));
 
   return new ValidationComposite(validations);
 };
