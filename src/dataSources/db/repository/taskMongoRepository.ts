@@ -1,4 +1,4 @@
-import { Task } from "../../../entities/task";
+import { Task } from "../../../entities/task/task";
 import { AddATaskModel } from "../../../usecases/addTask";
 import { AddTaskRepository } from "../../../usecases/repository/addTaskRepository";
 import { MongoDbManager } from "../config/mongoDbManager";
@@ -17,6 +17,7 @@ export default class TaskMongoRepository implements AddTaskRepository {
       title: taskById.title,
       description: taskById.description,
       date: taskById.date,
+      status: taskById.status,
     };
     return task;
   }

@@ -1,4 +1,4 @@
-import { Task } from "../entities/task";
+import { Task } from "../entities/task/task";
 
 export interface AddATaskModel {
   title: string;
