@@ -17,7 +17,6 @@ export default class TaskMongoRepository implements AddTaskRepository {
       title: taskById.title,
       description: taskById.description,
       date: taskById.date,
-      status: taskById.status,
     };
     return task;
   }
