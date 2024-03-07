@@ -22,7 +22,6 @@ const taskValidationCompositeFactory = (): ValidationComposite => {
     validations.push(new RequiredFieldsValidation(field));
   }
 
-  //TODO: DateValidation
   validations.push(new DateValidation("date", new DateValidatorAdapter()));
 
   return new ValidationComposite(validations);
