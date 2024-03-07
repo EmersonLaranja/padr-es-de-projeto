@@ -2,18 +2,17 @@ import { DbAddTask } from "../../dataSources/db/dbAddTask";
 import { LogErrorMongoRepository } from "../../dataSources/db/repository/logErrorMongoRepository";
 import TaskMongoRepository from "../../dataSources/db/repository/taskMongoRepository";
 
-import TaskController from "../controllers/task/task";
-import DateValidatorAdapter from "../dateValidatorAdapter";
+import AddTaskController from "../controllers/task/addTask";
 import { LogErrorControllerDecorator } from "../decorators/logErrorControllerDecorator";
 import { Controller } from "../interfaces/controller";
-import { taskValidationCompositeFactory } from "./taskValidationCompositeFactory";
+import { addTaskValidationCompositeFactory } from "./addTaskValidationCompositeFactory";
 
-export const taskControllerFactory = (): Controller => {
+export const addTaskControllerFactory = (): Controller => {
   const taskMongoRepository = new TaskMongoRepository();
   const dbAddTask = new DbAddTask(taskMongoRepository);
-  const taskController = new TaskController(
+  const taskController = new AddTaskController(
     dbAddTask,
-    taskValidationCompositeFactory()
+    addTaskValidationCompositeFactory()
   );
   const logMongoRepository = new LogErrorMongoRepository();
   return new LogErrorControllerDecorator(taskController, logMongoRepository);

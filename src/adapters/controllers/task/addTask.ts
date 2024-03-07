@@ -11,7 +11,7 @@ import {
   serverError,
 } from "../../presentations/api/httpResponses/httpResponses";
 
-export default class TaskController implements Controller {
+export default class AddTaskController implements Controller {
   constructor(
     private readonly addTask: AddTask,
     private readonly validation: Validation
