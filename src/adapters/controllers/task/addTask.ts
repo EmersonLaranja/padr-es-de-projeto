@@ -7,7 +7,7 @@ import { InvalidParamError } from "../../presentations/api/errors/invalid-param-
 import { MissingParamError } from "../../presentations/api/errors/missing-param-error";
 import {
   badRequest,
-  ok,
+  created,
   serverError,
 } from "../../presentations/api/httpResponses/httpResponses";
 
@@ -25,8 +25,7 @@ export class AddTaskController implements Controller {
 
       const { title, description, date } = httpRequest.body;
       const task = await this.addTask.add({ title, description, date });
-
-      return ok(task);
+      return created(task);
     } catch (error: any) {
       return serverError(error);
     }
