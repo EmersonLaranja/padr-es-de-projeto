@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { expressRouteAdapter } from "../../../expressRouteAdapter";
-import { addTaskControllerFactory } from "../../../factories/addTaskControllerFactory";
-import { deleteTaskControllerFactory } from "../../../factories/deleteTaskControllerFactory";
+import {
+  addTaskControllerFactory,
+  deleteTaskControllerFactory,
+} from "../../../factories";
 
 export default (router: Router): void => {
   router.post("/tasks", expressRouteAdapter(addTaskControllerFactory()));
